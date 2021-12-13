@@ -1,0 +1,311 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/sfx/misc/snd_step.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/music/misc/mus_debug.ogg" type="AudioStream" id=2]
+[ext_resource path="res://assets/images/bg.png" type="Texture" id=3]
+[ext_resource path="res://scenes/Conductor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://minigames/min_calibration/min_calibration.gd" type="Script" id=5]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BouncyBoye:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 0.1
+
+[sub_resource type="Animation" id=3]
+resource_name = "pulse"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("BouncyBoye:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.9 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("carre:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0.180392, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "pulse_yess"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("carre:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "pulse_yes"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("carre:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.219608, 1, 0, 1 ) ]
+}
+
+[node name="min_calibration" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="conductor" parent="." instance=ExtResource( 4 )]
+position = Vector2( -2, 0 )
+music = ExtResource( 2 )
+loop = true
+time_signature = 3
+
+[node name="sounds" type="Node" parent="."]
+
+[node name="snd_cowbell_1" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource( 1 )
+volume_db = -15.244
+
+[node name="snd_cowbell_2" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource( 1 )
+volume_db = -9.939
+pitch_scale = 1.15
+
+[node name="animation" type="Node" parent="."]
+
+[node name="sky" type="ColorRect" parent="animation"]
+margin_left = -20.0
+margin_top = -19.0
+margin_right = 1030.0
+margin_bottom = 625.0
+color = Color( 0.192157, 0.192157, 0.192157, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Bg" type="Sprite" parent="animation"]
+position = Vector2( 510, 458 )
+scale = Vector2( 2.3, 2.3 )
+texture = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="animation"]
+margin_left = -51.0
+margin_top = 492.0
+margin_right = 1048.0
+margin_bottom = 644.0
+rect_pivot_offset = Vector2( 210, -675 )
+color = Color( 0.313726, 0.815686, 0.321569, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="animation/ColorRect"]
+margin_right = 1099.0
+margin_bottom = 12.0
+rect_pivot_offset = Vector2( 210, -675 )
+color = Color( 0, 0.713726, 0.0117647, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BouncyBoye" type="ColorRect" parent="animation"]
+anchor_left = 0.492
+anchor_top = 0.747
+anchor_right = 0.492
+anchor_bottom = 0.747
+margin_left = -66.808
+margin_top = -66.2
+margin_right = 83.192
+margin_bottom = 83.8
+rect_pivot_offset = Vector2( 75, 150 )
+color = Color( 1, 0.231373, 0.231373, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="animator" type="AnimationPlayer" parent="animation"]
+anims/RESET = SubResource( 1 )
+anims/idle = SubResource( 2 )
+anims/pulse = SubResource( 3 )
+
+[node name="Control" type="Control" parent="animation"]
+margin_left = 325.0
+margin_top = 23.0
+margin_right = 365.0
+margin_bottom = 63.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="a_offset" type="HSlider" parent="animation/Control"]
+margin_left = -9.0
+margin_right = 439.0
+margin_bottom = 42.0
+min_value = -0.5
+max_value = 0.5
+step = 0.005
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="txt" type="RichTextLabel" parent="animation/Control/a_offset"]
+margin_left = 139.0
+margin_top = 41.0
+margin_right = 326.0
+margin_bottom = 81.0
+text = "Audio offset: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="i_offset" type="RichTextLabel" parent="animation/Control"]
+margin_top = 94.0
+margin_right = 597.0
+margin_bottom = 153.0
+text = "Input offset (Press 'Z'):"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="txt" type="RichTextLabel" parent="animation/Control/i_offset"]
+anchor_left = 1.172
+anchor_top = 0.175
+anchor_right = 1.172
+anchor_bottom = 0.175
+margin_left = -526.684
+margin_top = -9.325
+margin_right = -16.684
+margin_bottom = 12.675
+text = "0 ms"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="double" type="CheckBox" parent="animation/Control"]
+margin_left = -3.0
+margin_top = 133.0
+margin_right = 21.0
+margin_bottom = 157.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="txt" type="RichTextLabel" parent="animation/Control/double"]
+margin_left = 29.0
+margin_top = 8.0
+margin_right = 471.0
+margin_bottom = 48.0
+text = "Double tempo"
+
+[node name="mute" type="CheckBox" parent="animation/Control"]
+margin_left = 181.0
+margin_top = 139.0
+margin_right = 205.0
+margin_bottom = 163.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="txt" type="RichTextLabel" parent="animation/Control/mute"]
+margin_left = 29.0
+margin_top = 8.0
+margin_right = 471.0
+margin_bottom = 48.0
+text = "Mute cowbell"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mute2" type="CheckBox" parent="animation/Control"]
+margin_left = 332.0
+margin_top = 139.0
+margin_right = 356.0
+margin_bottom = 163.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="txt" type="RichTextLabel" parent="animation/Control/mute2"]
+margin_left = 29.0
+margin_top = 8.0
+margin_right = 471.0
+margin_bottom = 48.0
+text = "Mute feedback
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="reset" type="Button" parent="animation/Control"]
+margin_left = 459.0
+margin_top = 93.0
+margin_right = 507.0
+margin_bottom = 113.0
+text = "Reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="animation2" type="Node" parent="."]
+
+[node name="carre" type="ColorRect" parent="animation2"]
+margin_left = 648.0
+margin_top = 420.0
+margin_right = 688.0
+margin_bottom = 460.0
+color = Color( 0, 0.180392, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="animation2"]
+anims/RESET = SubResource( 4 )
+anims/pulse_no = SubResource( 5 )
+anims/pulse_yes = SubResource( 6 )
+
+[connection signal="new_bar" from="conductor" to="." method="_on_conductor_new_bar"]
+[connection signal="new_beat" from="conductor" to="." method="_on_conductor_new_beat"]
+[connection signal="value_changed" from="animation/Control/a_offset" to="." method="_on_a_offset_value_changed"]
+[connection signal="toggled" from="animation/Control/double" to="." method="_on_double_toggled"]
+[connection signal="toggled" from="animation/Control/mute" to="." method="_on_mute_toggled"]
+[connection signal="toggled" from="animation/Control/mute2" to="." method="_on_mute2_toggled"]
+[connection signal="pressed" from="animation/Control/reset" to="." method="_on_reset_pressed"]

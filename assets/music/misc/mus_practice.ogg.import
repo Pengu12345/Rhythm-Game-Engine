@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mus_practice.ogg-cafc5e594de5b7448feeb46b1f3c4baa.oggstr"
+
+[deps]
+
+source_file="res://assets/music/misc/mus_practice.ogg"
+dest_files=[ "res://.import/mus_practice.ogg-cafc5e594de5b7448feeb46b1f3c4baa.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

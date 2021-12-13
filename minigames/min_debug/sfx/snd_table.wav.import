@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/snd_table.wav-4e625e488c2cfbc24f08aab2e358aa7e.sample"
+
+[deps]
+
+source_file="res://minigames/min_debug/sfx/snd_table.wav"
+dest_files=[ "res://.import/snd_table.wav-4e625e488c2cfbc24f08aab2e358aa7e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

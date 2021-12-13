@@ -1,0 +1,173 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://minigames/min_debug/min_debug.gd" type="Script" id=2]
+[ext_resource path="res://minigames/min_debug/sfx/snd_glass.wav" type="AudioStream" id=4]
+[ext_resource path="res://minigames/min_debug/sfx/snd_paper_short.wav" type="AudioStream" id=5]
+[ext_resource path="res://minigames/min_debug/sfx/snd_table.wav" type="AudioStream" id=6]
+[ext_resource path="res://minigames/min_debug/sfx/snd_shake.wav" type="AudioStream" id=7]
+[ext_resource path="res://minigames/min_debug/images/dancer.png" type="Texture" id=8]
+[ext_resource path="res://icon.png" type="Texture" id=9]
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("background:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.556863, 0.305882, 0.505882, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "pulse"
+length = 0.3
+step = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("background:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.572549, 0.380392, 0.537255, 1 ), Color( 0.556863, 0.305882, 0.505882, 1 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "pulse"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "pulse"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 1 ), Vector2( 1, 1 ) ]
+}
+
+[node name="min_debug" type="Node2D"]
+script = ExtResource( 2 )
+loaded_sfxs = {
+"fail": ExtResource( 5 ),
+"glass": ExtResource( 4 ),
+"hit": ExtResource( 6 ),
+"shake": ExtResource( 7 )
+}
+
+[node name="Background" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="background" type="ColorRect" parent="Background"]
+margin_left = -79.0
+margin_top = -46.0
+margin_right = 1047.0
+margin_bottom = 613.0
+color = Color( 0.556863, 0.305882, 0.505882, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="animator" type="AnimationPlayer" parent="Background"]
+anims/RESET = SubResource( 5 )
+anims/pulse = SubResource( 6 )
+
+[node name="Dancer1" type="Sprite" parent="."]
+position = Vector2( 176, 283 )
+texture = ExtResource( 8 )
+
+[node name="Icon" type="Sprite" parent="Dancer1"]
+modulate = Color( 1, 0.458824, 0.964706, 1 )
+position = Vector2( 15, 225 )
+scale = Vector2( 2.9375, 2.9375 )
+texture = ExtResource( 9 )
+
+[node name="anim" type="AnimationPlayer" parent="Dancer1"]
+anims/RESET = SubResource( 1 )
+anims/pulse = SubResource( 2 )
+
+[node name="Dancer2" type="Sprite" parent="."]
+position = Vector2( 832, 283 )
+texture = ExtResource( 8 )
+flip_h = true
+
+[node name="anim" type="AnimationPlayer" parent="Dancer2"]
+anims/RESET = SubResource( 3 )
+anims/pulse = SubResource( 4 )
+
+[node name="Icon" type="Sprite" parent="Dancer2"]
+modulate = Color( 1, 0.458824, 0.964706, 1 )
+position = Vector2( -6, 225 )
+scale = Vector2( 2.9375, 2.9375 )
+texture = ExtResource( 9 )
+
+[node name="spawner" type="ColorRect" parent="."]
+margin_left = 430.0
+margin_top = 278.0
+margin_right = 593.0
+margin_bottom = 339.0
+color = Color( 1, 0.929412, 0.364706, 0.388235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cue_spawner" type="Node2D" parent="."]
+position = Vector2( 494, -49 )

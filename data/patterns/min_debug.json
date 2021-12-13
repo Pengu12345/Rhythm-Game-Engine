@@ -1,0 +1,23 @@
+[
+  {
+    "name":"single_cube",
+    "cues": [
+      {"type":"sfx", "name":"snd_glass",   "bar":0, "beat":0},
+      {"type":"event", "name":"spawn_cube", "bar":0, "beat":0},
+      {"type":"input", "name":"input_table", "bar":0, "beat":1}
+    ]
+  },
+
+  {
+    "name":"double_cube",
+    "cues": [
+      {"type":"sfx", "name":"snd_shake","bar":0, "beat":0},
+      {"type":"event", "name":"spawn_cube", "bar":0, "beat":0},
+      {"type":"event", "name":"spawn_cube", "bar":0, "beat":0.5},
+      {"type":"sfx", "name":"snd_shake","bar":0, "beat":0.5},
+      {"type":"event", "name":"cue_spawn_cube", "bar":0, "beat":0.5},
+      {"type":"input", "name":"input_table", "bar":0, "beat":1},
+      {"type":"input", "name":"input_table", "bar":0, "beat":1.5}
+    ]
+  }
+]

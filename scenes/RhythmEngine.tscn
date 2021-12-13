@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/RhythmEngine.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Conductor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/music/misc/mus_practice_2.wav" type="AudioStream" id=3]
+
+[node name="RhythmEngine" type="Node2D"]
+script = ExtResource( 1 )
+chart_path = "res://data/minigames/min_debug.json"
+transition_time = 0.16
+
+[node name="Conductor" parent="." instance=ExtResource( 2 )]
+music = ExtResource( 3 )
+loop = true
+audio_offset = -0.081
+
+[connection signal="looping" from="Conductor" to="." method="_loop"]

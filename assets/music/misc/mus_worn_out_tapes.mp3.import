@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/mus_worn_out_tapes.mp3-b76f9bf913a3f37b5e5ba6092460dc62.mp3str"
+
+[deps]
+
+source_file="res://assets/music/misc/mus_worn_out_tapes.mp3"
+dest_files=[ "res://.import/mus_worn_out_tapes.mp3-b76f9bf913a3f37b5e5ba6092460dc62.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,6 @@
+{
+  "routes": [
+    {"name":"min_debug","path":"res://minigames/min_debug/min_debug.tscn"},
+    {"name":"min_bird","path":"res://minigames/min_bird/min_bird.tscn"}
+  ]
+}

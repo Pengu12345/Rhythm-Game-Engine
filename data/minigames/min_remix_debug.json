@@ -1,0 +1,14 @@
+{
+  "name":"Debug Remix",
+  "bpm":149,
+  "time_signature":4,
+
+  "starting_minigame":"min_debug",
+  "minigames": ["min_debug", "min_bird"],
+  "loaded_patterns":["min_debug"],
+
+  "chart": [
+    {"type":"pattern", "name":"single_cube", "bar": 0, "beat":0, "repeat":1000, "interval":0.5 }
+
+  ]
+}

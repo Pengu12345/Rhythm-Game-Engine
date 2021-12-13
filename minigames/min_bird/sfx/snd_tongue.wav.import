@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/snd_tongue.wav-4c2ae169ddc19d7951cade0857319e0d.sample"
+
+[deps]
+
+source_file="res://minigames/min_bird/sfx/snd_tongue.wav"
+dest_files=[ "res://.import/snd_tongue.wav-4c2ae169ddc19d7951cade0857319e0d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
