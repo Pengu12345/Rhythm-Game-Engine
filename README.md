@@ -13,6 +13,7 @@ Running the project is as easy as pressing F5 on your keyboard, or if you only h
 
 ![image](https://user-images.githubusercontent.com/24594540/145891476-90f1f5a2-166b-40ff-88f0-d61522962ee5.png)
 
+Space or Z are used to make actions.
 
 # External ressources
 
