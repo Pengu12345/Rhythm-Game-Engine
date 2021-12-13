@@ -17,4 +17,5 @@ Running the project is as easy as pressing F5 on your keyboard, or if you only h
 # External ressources
 
 TO-DO List: https://trello.com/b/eGR37RTG/rhythm-game-todo
+
 Youtube Channel: https://www.youtube.com/channel/UCY3V-Sr32Uyb96VsLCAnOhw
