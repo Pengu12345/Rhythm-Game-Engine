@@ -31,13 +31,18 @@ func set_conductor(node):
 
 # Creates an AudioStreamPlayer on the go. I don't know if it's any less efficient.
 # Should be looked into eventually.
-func play_sound(sound_name, node, _bus = ""):
+func play_sound(sound_name, node, _db = 0, _pitch = 1, _bus = ""):
 	var ap = AudioStreamPlayer.new()
 	
 	if loaded_sfxs.has(sound_name):
 		var stream = loaded_sfxs[sound_name] 
 		ap.stream = stream
-		stream.loop_mode = AudioStreamSample.LOOP_DISABLED
+		ap.pitch_scale = _pitch
+		ap.volume_db = _db
+		if stream is AudioStreamSample:
+			stream.set_loop_mode(AudioStreamSample.LOOP_DISABLED)
+		else:
+			stream.set_loop(AudioStreamSample.LOOP_DISABLED)
 		if _bus != "": ap.bus = _bus
 		node.add_child(ap)
 		ap.play()

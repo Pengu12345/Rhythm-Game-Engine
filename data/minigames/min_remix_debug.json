@@ -3,29 +3,27 @@
   "bpm":149,
   "time_signature":4,
 
-  "starting_minigame":"min_debug",
+  "starting_minigame":"min_bird",
   "minigames": ["min_debug", "min_bird"],
   "loaded_patterns":["min_debug"],
 
   "chart": [
-    {"type":"pattern", "name":"single_cube", "bar": 0, "beat":0, "repeat":4, "interval":2 },
+    {"type":"sfx", "name":"snd_chirp", "bar":0, "beat":0, "repeat":8, "interval":1},
 
-    {"type":"event", "name":"load_minigame", "bar":1, "beat":3.5, "value":"min_bird"},
+    {"type":"sfx", "name":"snd_chirp", "bar": 2, "beat":0 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 2, "beat":1 },
 
-    {"type":"sfx", "name":"snd_tongue", "bar": 2, "beat":0 },
-    {"type":"sfx", "name":"snd_tongue", "bar": 2, "beat":1 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 2, "beat":2 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 2, "beat":2.5 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 2, "beat":3 },
 
-    {"type":"sfx", "name":"snd_tongue", "bar": 2, "beat":2 },
-    {"type":"sfx", "name":"snd_tongue", "bar": 2, "beat":2.5 },
-    {"type":"sfx", "name":"snd_tongue", "bar": 2, "beat":3 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 3, "beat":0 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 3, "beat":0.5 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 3, "beat":1 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 3, "beat":1.5 },
 
-    {"type":"sfx", "name":"snd_tongue", "bar": 3, "beat":0 },
-    {"type":"sfx", "name":"snd_tongue", "bar": 3, "beat":0.5 },
-    {"type":"sfx", "name":"snd_tongue", "bar": 3, "beat":1 },
-    {"type":"sfx", "name":"snd_tongue", "bar": 3, "beat":1.5 },
-
-    {"type":"sfx", "name":"snd_tongue", "bar": 3, "beat":2.5 },
-    {"type":"sfx", "name":"snd_tongue", "bar": 3, "beat":3 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 3, "beat":2.5 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 3, "beat":3 },
 
     {"type":"event", "name":"load_minigame", "bar":3, "beat":3.5, "value":"min_debug"},
 
@@ -40,20 +38,20 @@
 
     {"type":"event", "name":"load_minigame", "bar":7, "beat":3.7, "value":"min_bird"},
 
-    {"type":"sfx", "name":"snd_tongue", "bar": 8, "beat":0 },
-    {"type":"sfx", "name":"snd_tongue", "bar": 8, "beat":1 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 8, "beat":0 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 8, "beat":1 },
 
-    {"type":"sfx", "name":"snd_tongue", "bar": 8, "beat":2 },
-    {"type":"sfx", "name":"snd_tongue", "bar": 8, "beat":2.5 },
-    {"type":"sfx", "name":"snd_tongue", "bar": 8, "beat":3 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 8, "beat":2 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 8, "beat":2.5 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 8, "beat":3 },
 
-    {"type":"sfx", "name":"snd_tongue", "bar": 9, "beat":0 },
-    {"type":"sfx", "name":"snd_tongue", "bar": 9, "beat":0.5 },
-    {"type":"sfx", "name":"snd_tongue", "bar": 9, "beat":1 },
-    {"type":"sfx", "name":"snd_tongue", "bar": 9, "beat":1.5 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 9, "beat":0 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 9, "beat":0.5 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 9, "beat":1 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 9, "beat":1.5 },
 
-    {"type":"sfx", "name":"snd_tongue", "bar": 9, "beat":2.5 },
-    {"type":"sfx", "name":"snd_tongue", "bar": 9,"beat":3 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 9, "beat":2.5 },
+    {"type":"sfx", "name":"snd_chirp", "bar": 9,"beat":3 },
 
     {"type":"event", "name":"load_minigame", "bar":9, "beat":3.7, "value":"min_debug"},
 

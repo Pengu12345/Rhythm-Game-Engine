@@ -18,6 +18,10 @@ config/icon="res://icon.png"
 
 ResManager="*res://scripts/ResManager.gd"
 
+[display]
+
+window/size/resizable=false
+
 [input]
 
 control_action={

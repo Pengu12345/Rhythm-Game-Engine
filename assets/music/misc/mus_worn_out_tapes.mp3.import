@@ -11,5 +11,5 @@ dest_files=[ "res://.import/mus_worn_out_tapes.mp3-b76f9bf913a3f37b5e5ba6092460d
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

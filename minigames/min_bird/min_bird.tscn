@@ -1,24 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://minigames/min_bird/min_bird.gd" type="Script" id=1]
-[ext_resource path="res://minigames/min_bird/sfx/snd_tongue.wav" type="AudioStream" id=2]
-[ext_resource path="res://minigames/min_bird/images/RAT.jpg" type="Texture" id=3]
+[ext_resource path="res://minigames/min_bird/sfx/snd_chirp.wav" type="AudioStream" id=2]
+[ext_resource path="res://minigames/min_bird/sfx/snd_hit.wav" type="AudioStream" id=3]
+[ext_resource path="res://minigames/min_bird/images/bg.png" type="Texture" id=4]
 
 [node name="min_bird" type="Node2D"]
 script = ExtResource( 1 )
 loaded_sfxs = {
-"snd_tongue": ExtResource( 2 )
+"snd_chirp": ExtResource( 2 ),
+"snd_hit": ExtResource( 3 )
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 1026.0
-margin_bottom = 606.0
-color = Color( 0.145098, 0.145098, 0.145098, 1 )
+[node name="Bg" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+centered = false
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
-
-[node name="Sus" type="Sprite" parent="."]
-position = Vector2( 515, 278 )
-scale = Vector2( 0.214152, 0.214152 )
-texture = ExtResource( 3 )
