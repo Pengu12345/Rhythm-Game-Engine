@@ -3,7 +3,7 @@ A Rhythm Heaven Inspired Engine.
 
 It is still in Heavy development, there is a lot of debug artifacts and needs a lot of clean up.
 
-# How to open the project
+## How to open the project
 
 You can either try and figure out everything by reading the files, or you can make your life easier by downloading and installing the Godot Engine (Which can be found here: https://godotengine.org).
 
@@ -15,14 +15,18 @@ Running the project is as easy as pressing F5 on your keyboard, or if you only h
 
 Space or Z are used to make actions.
 
-# External ressources
+## Documentation
+
+The charting documentation can be found [here](https://github.com/Pengu12345/Rhythm-Game-Engine/wiki)!
+
+## External ressources
 
 TO-DO List: https://trello.com/b/eGR37RTG/rhythm-game-todo
 
 Youtube Channel: https://www.youtube.com/channel/UCY3V-Sr32Uyb96VsLCAnOhw
 
 
-# Special thanks
+## Special thanks
 
 Users u/fizzd and u/jusksmit for writing amazing articles about Rhythm Game Development.
 Articles can respectively be found [here](https://www.reddit.com/r/gamedev/comments/2fxvk4/heres_a_quick_and_dirty_guide_i_just_wrote_how_to/) and [here](https://www.reddit.com/r/gamedev/comments/13y26t/how_do_rhythm_games_stay_in_sync_with_the_music/c78aawd/).
