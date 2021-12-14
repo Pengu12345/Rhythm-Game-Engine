@@ -13,7 +13,8 @@ Running the project is as easy as pressing F5 on your keyboard, or if you only h
 
 ![image](https://user-images.githubusercontent.com/24594540/145891476-90f1f5a2-166b-40ff-88f0-d61522962ee5.png)
 
-Space or Z are used to make actions.
+Space or Z are used as default inputs.
+
 
 ## Documentation
 
@@ -21,9 +22,11 @@ The charting documentation can be found [here](https://github.com/Pengu12345/Rhy
 
 ## External ressources
 
-TO-DO List: https://trello.com/b/eGR37RTG/rhythm-game-todo
+* If you want to start and modify the project, it is strongly advised to [learn how the engine works](https://docs.godotengine.org/en/stable/getting_started/step_by_step/index.html), along with using the [Godot Official Documentation](https://docs.godotengine.org/en/stable/index.html).
 
-Youtube Channel: https://www.youtube.com/channel/UCY3V-Sr32Uyb96VsLCAnOhw
+* Here's my [TO-DO List](https://trello.com/b/eGR37RTG/rhythm-game-todo)
+
+* Link to my [Youtube channel](https://www.youtube.com/channel/UCY3V-Sr32Uyb96VsLCAnOhw)
 
 
 ## Special thanks
