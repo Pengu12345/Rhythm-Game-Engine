@@ -15,6 +15,7 @@ Running the project is as easy as pressing F5 on your keyboard, or if you only h
 
 Space or Z are used as default inputs.
 
+***Make sure you run the latest version of the Godot Editor!***
 
 ## Documentation
 
