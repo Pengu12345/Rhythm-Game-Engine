@@ -3,6 +3,12 @@
   "bpm":149,
   "time_signature":4,
 
+  "loop":false,
+  "music_path":"res://assets/music/misc/mus_worn_out_tapes.mp3",
+
+  "input_margin":0.05,
+  "audio_offset":0,
+
   "starting_minigame":"min_bird",
   "minigames": ["min_debug", "min_bird"],
   "loaded_patterns":["min_debug"],

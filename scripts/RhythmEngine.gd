@@ -5,6 +5,8 @@
 
 extends Node2D
 
+signal load_failed(message)
+
 var conductor
 
 export var chart_path = ""
@@ -28,11 +30,13 @@ var current_minigame
 
 func _ready():
 	conductor = $Conductor
-	parse_minigame_data(chart_path)
+
+func play():
+	if !parse_minigame_data(chart_path):
+		return false
+		
 	load_minigame(starting_minigame)
-	
 	yield(get_tree().create_timer(1.0), "timeout")
-	
 	conductor.start_song()
 
 func _process(delta):
@@ -134,9 +138,34 @@ func parse_minigame_data(path):
 	#Parse the content
 	var res = JSON.parse(content).get_result()
 	
+	if typeof(res) != TYPE_DICTIONARY:
+		emit_signal("load_failed", "Error loading the JSON file. There is probably a typo somewhere.\n" + str(res))
+		return false
+	
 	#-----------------------------------#
 	# GETTING ALL THE DATA OF THE CHART #
 	#-----------------------------------#
+	
+	var needed_properties = [
+		"name",
+		"loaded_patterns",
+		"minigames",
+		"starting_minigame",
+		"music_path",
+		"bpm",
+		"time_signature",
+		"loop",
+		"chart"
+		]
+	
+	var potential_missed = []
+	for p in needed_properties:
+		if !res.has(p):
+			potential_missed.append(str(p + " "))
+	
+	if potential_missed.size() != 0:
+		emit_signal("load_failed","Missing properties in chart: " + str(potential_missed))
+		return false
 	
 	#Loading all of the patterns
 	for pattern_name in res["loaded_patterns"]:
@@ -146,11 +175,19 @@ func parse_minigame_data(path):
 	for name in res["minigames"]:
 		minigame_list[name] = ResManager.get_scene_by_name(name)
 	
+	#Loading the music
+	conductor.music = load(res["music_path"])
+	if !conductor.music:
+		emit_signal("load_failed", "Couldn't load the music at the specified path " + res["music_path"])
+		return false
+	conductor.update_music_properties()
+	
 	#Get general informations about the song
 	var beat_length = (120.0 / res["bpm"]) / 2
 	var bar_length = beat_length*res["time_signature"]
 	starting_minigame = res["starting_minigame"]
 	conductor.bpm = res["bpm"]
+	conductor.loop = res["loop"]
 	
 	# Getting the chart ready
 	var chart = res["chart"]
@@ -184,6 +221,8 @@ func parse_minigame_data(path):
 	#Sort the lists to be in order
 	cue_list.sort_custom(self, "sort_by_position")
 	input_list.sort_custom(self, "sort_by_position")
+	
+	return true
 	
 	
 #We assume that both elements are two cues that have an index "position".

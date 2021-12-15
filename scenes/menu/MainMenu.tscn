@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/menu/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://scenes/RhythmEngine.tscn" type="PackedScene" id=2]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource( 1 )
+rhythm_engine = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -12.0
+margin_top = -8.0
+margin_right = 1041.0
+margin_bottom = 614.0
+color = Color( 0.0588235, 0.0588235, 0.0588235, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="FileDialog" type="FileDialog" parent="."]
+margin_left = 210.0
+margin_top = 162.0
+margin_right = 803.0
+margin_bottom = 527.0
+window_title = "Open a Chart"
+mode = 0
+current_dir = "res://data/minigames"
+current_file = "min_debug.json"
+current_path = "res://data/minigames/min_debug.json"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+margin_left = 374.0
+margin_top = 211.0
+margin_right = 650.0
+margin_bottom = 397.0
+window_title = "Ouch!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="remix_display" type="Node2D" parent="."]
+
+[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]
+[connection signal="confirmed" from="AcceptDialog" to="." method="_on_AcceptDialog_confirmed"]

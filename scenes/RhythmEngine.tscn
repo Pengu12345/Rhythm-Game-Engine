@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scripts/RhythmEngine.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Conductor.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/music/misc/mus_worn_out_tapes.mp3" type="AudioStream" id=3]
 
 [node name="RhythmEngine" type="Node2D"]
 script = ExtResource( 1 )
@@ -12,8 +11,6 @@ input_margin = 0.05
 input_offset = -0.033
 
 [node name="Conductor" parent="." instance=ExtResource( 2 )]
-music = ExtResource( 3 )
-loop = true
 audio_offset = -0.064
 
 [connection signal="looping" from="Conductor" to="." method="_loop"]
