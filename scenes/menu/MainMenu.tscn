@@ -19,11 +19,12 @@ __meta__ = {
 }
 
 [node name="FileDialog" type="FileDialog" parent="."]
+visible = true
 margin_left = 210.0
 margin_top = 162.0
 margin_right = 803.0
 margin_bottom = 527.0
-window_title = "Open a Chart"
+window_title = "Open a File"
 mode = 0
 current_dir = "res://data/minigames"
 current_file = "min_debug.json"

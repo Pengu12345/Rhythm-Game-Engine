@@ -20,7 +20,7 @@ var iterated = 0
 
 var loaded_music
 
-export var transition_time = 0.1
+export var transition_time = 0.05
 
 export var input_margin = 0.1
 export var input_offset = 0.0

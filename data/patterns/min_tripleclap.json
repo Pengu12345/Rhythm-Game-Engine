@@ -1,0 +1,42 @@
+[
+  {
+    "name":"knitting",
+    "cues": [
+      {"type":"sfx", "name":"snd_knit","bar":0, "beat":0},
+      {"type":"event", "name":"knit", "bar":0, "beat":0},
+      {"type":"input", "name":"input_knit", "bar":0, "beat":0}
+    ]
+  },
+  {
+    "name":"prepare_jump",
+    "cues": [
+      {"type":"event", "name":"set_focus", "bar":0, "beat":-1,"value":true},
+      {"type":"sfx", "name":"snd_cowbell", "bar":0, "beat":-1},
+      {"type":"sfx", "name":"snd_cowbell", "bar":0, "beat":-0.5},
+      {"type":"event", "name":"prepare_jump", "bar":0, "beat":0},
+      {"type":"sfx", "name":"snd_cowbell", "bar":0, "beat":0}
+    ]
+  },
+  {
+    "name":"jump1",
+    "cues": [
+      {"type":"event", "name":"set_focus", "bar":0, "beat":0,"value":false},
+      {"type":"sfx", "name":"snd_jump",   "bar":0, "beat":0},
+      {"type":"event", "name":"jump1", "bar":0, "beat":0},
+    ]
+  },
+  {
+    "name":"jump2",
+    "cues": [
+      {"type":"sfx", "name":"snd_jump",   "bar":0, "beat":0},
+      {"type":"event", "name":"jump2", "bar":0, "beat":0},
+    ]
+  },
+  {
+    "name":"jump3",
+    "cues": [
+      {"type":"event", "name":"jump3", "bar":0, "beat":0},
+      {"type":"input", "name":"input_jump", "bar":0, "beat":0}
+    ]
+  }
+]
