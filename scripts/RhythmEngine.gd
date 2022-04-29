@@ -5,8 +5,6 @@
 
 extends Node2D
 
-signal load_failed(message)
-
 var conductor
 
 export var chart_path = ""
@@ -23,13 +21,28 @@ var loaded_music
 export var transition_time = 0.05
 
 export var input_margin = 0.1
+export var input_barely_margin = 0.1
 export var input_offset = 0.0
 
 var starting_minigame
 var current_minigame
 
+var faded_out = false
+
+var max_mistakes_superb = 3
+var max_mistakes_ok = 8
+var nb_mistakes = 0
+var final_rating = 2 # 0 -> Try again; 1 -> OK; 2 -> Superb
+
 func _ready():
 	conductor = $Conductor
+	chart_path = GameManager.loaded_chart
+	
+	# Treshold to avoid paradoxes
+	if max_mistakes_superb > max_mistakes_ok:
+		max_mistakes_superb = max_mistakes_ok
+	
+	play()
 
 func play():
 	if !parse_minigame_data(chart_path):
@@ -54,6 +67,9 @@ func _process(delta):
 							update_chart_bpm(conductor.get_bpm(), cue["value"], cue["position"])
 							conductor.set_bpm(cue["value"])
 						"load_minigame": load_minigame(cue["value"])
+						"end_chart":
+							conductor.song_started = false
+							_on_Conductor_end_song()
 						_:current_minigame.play_event(cue)
 				
 			cue_list.remove(0)
@@ -62,46 +78,67 @@ func _process(delta):
 	if input_list.size() != 0:
 		var input = input_list[0]
 		var input_pos = input["position"]
-		var pos = conductor.get_raw_song_position() - input_offset - input_margin
+		var pos = conductor.get_raw_song_position() - input_offset - input_margin - input_barely_margin
 		if pos > input_pos:
-			current_minigame.on_missed_input(input)
+			current_minigame.manage_input("missed", input)
 			input_list.remove(0)
 	
 	 #Check input
 	if Input.is_action_just_pressed("control_action"):
-		if input_list.size() == 0:
-			current_minigame.on_blank_input()
+		if input_list.size() == 0: # If there's no inputs
+			# 0 is the action id (relevant if the minigame has multiple inputs
+			current_minigame.manage_input("blank",0)
 			return
 		var input = input_list[0]
-		on_input(input)
+		# Launch the event function.
+		on_input(input,0)
 	
 	current_minigame._on_process(delta)
 
 #-----------------#
 # INPUT FUNCTIONS #
 #-----------------#
-func on_input(input):
+func on_input(input,action_id):
 	var input_pos = input["position"]
-	if is_input_in_rythm(input_pos):
-		current_minigame.on_good_input(input)
+	
+	# Get the input rating relative to the cue's position and the song position
+	var input_rating = get_input_rating(input_pos)
+	
+	# 0 --> Blank; 1 --> Barely; 2 --> Ok
+	if input_rating != 0:
+		if input_rating == 1: current_minigame.manage_input("barely",input)
+		if input_rating == 2: current_minigame.manage_input("good", input)
 		input_list.remove(0)
 	else:
-		current_minigame.on_blank_input()
+		current_minigame.manage_input("blank",action_id)
 
-#Return true if the input requested is right relative to the current song position
-func is_input_in_rythm(hit_position):
+#Returns the rating of the input. 0 --> Blank; 1 --> Barely; 2 --> Ok
+func get_input_rating(hit_position):
 	var timing = get_input_timing(hit_position)
-	return is_input_timing_right(timing)
+	if !is_input_timing_right(timing):
+		return 0 # Blank. Can be considered a fail in some minigames
+	else:
+		if is_input_barely(timing):
+			return 1 # Barely
+		else:
+			return 2 # Ok
 
 #Returns in milliseconds the timing of the hit position relative to the song position
 func get_input_timing(hit_position):
 	var song_pos = conductor.get_raw_song_position() - input_offset
 	var timing = hit_position - song_pos
+	print(str(timing) + " -- " + str(input_margin+input_barely_margin))
 	return timing
 
-#Checks if the timing enters within the input margins of the conductor
+#Checks if the timing enters within the input margins of the conductor (ok + barely)
 func is_input_timing_right(timing):
-	return timing < input_margin and timing > -input_margin
+	return timing < input_margin + input_barely_margin and timing > -input_margin - input_barely_margin
+
+func is_input_barely(timing):
+	#We first see if our input is correct (ok margin + barely margin)
+	var is_input_right = is_input_timing_right(timing)
+	#If it's not an ok margin, then it MUST be a barely margin
+	return is_input_right and (timing > input_margin or timing < -input_margin)
 
 func set_input_margin(new_margin): input_margin = new_margin
 func set_input_offset(new_offset): input_offset = new_offset
@@ -122,8 +159,12 @@ func load_minigame(name):
 	current_minigame = scene.instance()
 	current_minigame.set_conductor(conductor)
 	
-	yield(get_tree().create_timer(transition_time), "timeout") #Makeshift transition
-	add_child(current_minigame)
+	current_minigame.connect("miss", self, "_on_miss")
+	current_minigame.connect("auto_ok", self, "_on_auto_ok")
+	current_minigame.connect("auto_fail", self, "_on_auto_fail")
+	
+	yield(get_tree().create_timer(transition_time), "timeout") # Papercrafted
+	$Display.add_child(current_minigame)
 
 
 #########################
@@ -131,15 +172,10 @@ func load_minigame(name):
 #########################
 
 func parse_minigame_data(path):
-	var file = File.new()
-	file.open(path, File.READ)
-	var content = file.get_as_text()
-	file.close()
-	#Parse the content
-	var res = JSON.parse(content).get_result()
+	var res = ResManager.parse_JSON(path)
 	
 	if typeof(res) != TYPE_DICTIONARY:
-		emit_signal("load_failed", "Error loading the JSON file. There is probably a typo somewhere.\n" + str(res))
+		throw_error("Error loading the JSON file. There is probably a typo somewhere.\n" + str(res))
 		return false
 	
 	#-----------------------------------#
@@ -155,6 +191,8 @@ func parse_minigame_data(path):
 		"bpm",
 		"time_signature",
 		"loop",
+		"input_margin",
+		"input_barely_margin",
 		"chart"
 		]
 	
@@ -164,7 +202,7 @@ func parse_minigame_data(path):
 			potential_missed.append(str(p + " "))
 	
 	if potential_missed.size() != 0:
-		emit_signal("load_failed","Missing properties in chart: " + str(potential_missed))
+		throw_error("Missing properties in chart: " + str(potential_missed))
 		return false
 	
 	#Loading all of the patterns
@@ -178,7 +216,7 @@ func parse_minigame_data(path):
 	#Loading the music
 	conductor.music = load(res["music_path"])
 	if !conductor.music:
-		emit_signal("load_failed", "Couldn't load the music at the specified path " + res["music_path"])
+		throw_error("Couldn't load the music at the specified path " + res["music_path"])
 		return false
 	conductor.update_music_properties()
 	
@@ -188,6 +226,9 @@ func parse_minigame_data(path):
 	starting_minigame = res["starting_minigame"]
 	conductor.bpm = res["bpm"]
 	conductor.loop = res["loop"]
+	
+	input_margin = res["input_margin"]
+	input_barely_margin = res["input_barely_margin"]
 	
 	# Getting the chart ready
 	var chart = res["chart"]
@@ -223,8 +264,7 @@ func parse_minigame_data(path):
 	input_list.sort_custom(self, "sort_by_position")
 	
 	return true
-	
-	
+
 #We assume that both elements are two cues that have an index "position".
 func sort_by_position(a,b):
 	return a['position'] < b['position']
@@ -253,9 +293,39 @@ func parse_cue(cue):
 	
 	return res
 
+func throw_error(error_message):
+	GameManager.load_previous_scene(error_message)
+
+#-------------------------#
+# END OF SONGS AND RATING #
+#-------------------------#
+
+# final_rating ==>  0 -> Try again; 1 -> OK; 2 -> Superb
+func _on_miss(weight = 1):
+	nb_mistakes += weight
+	if(nb_mistakes >= max_mistakes_superb and final_rating == 2): final_rating = 1
+	if(nb_mistakes >= max_mistakes_ok and final_rating == 1): final_rating = 0
+
+func _on_auto_ok():
+	final_rating = 1
+
+func _on_auto_fail():
+	final_rating = 0
 
 func _loop():
 	iterated += 1
 	update_chart_bpm(conductor.get_bpm(),120,0)
 	conductor.set_bpm(120)
 	parse_minigame_data(chart_path)
+
+func _on_Conductor_end_song():
+	var animator = $BlackScreen/fader
+	yield(get_tree().create_timer(2.0), "timeout")
+	if !faded_out:
+		animator.play("fade_out",-1,1.5)
+		yield(animator, "animation_finished")
+	
+	print(nb_mistakes)
+	print(final_rating)
+	GameManager.loaded_rating = final_rating
+	GameManager.load_rating_screen()

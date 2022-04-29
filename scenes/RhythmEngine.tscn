@@ -1,7 +1,52 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/RhythmEngine.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Conductor.tscn" type="PackedScene" id=2]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
 
 [node name="RhythmEngine" type="Node2D"]
 script = ExtResource( 1 )
@@ -13,4 +58,21 @@ input_offset = -0.033
 [node name="Conductor" parent="." instance=ExtResource( 2 )]
 audio_offset = -0.064
 
+[node name="Display" type="Node2D" parent="."]
+
+[node name="BlackScreen" type="ColorRect" parent="."]
+margin_right = 1030.0
+margin_bottom = 611.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="fader" type="AnimationPlayer" parent="BlackScreen"]
+anims/RESET = SubResource( 1 )
+anims/fade_in = SubResource( 3 )
+anims/fade_out = SubResource( 2 )
+
+[connection signal="end_song" from="Conductor" to="." method="_on_Conductor_end_song"]
 [connection signal="looping" from="Conductor" to="." method="_loop"]

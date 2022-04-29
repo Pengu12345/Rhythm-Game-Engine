@@ -12,7 +12,7 @@ func play_sfx(sfx_name):
 
 func on_missed_input(input):pass
 
-func on_blank_input():
+func on_blank_input(action_id):
 	play_sound("snd_hit", self,-10)
 
 func on_good_input(input):pass

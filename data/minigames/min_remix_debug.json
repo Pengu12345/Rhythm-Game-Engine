@@ -7,6 +7,7 @@
   "music_path":"res://assets/music/misc/mus_worn_out_tapes.mp3",
 
   "input_margin":0.05,
+  "input_barely_margin":0.00,
   "audio_offset":0,
 
   "starting_minigame":"min_debug",
@@ -78,6 +79,8 @@
     {"type":"event", "name":"set_dancers", "bar":18, "beat":3.9, "value":true},
     {"type":"event", "name":"set_pulse", "bar":18, "beat":3.9, "value":true},
 
-    {"type":"pattern", "name":"double_cube", "bar": 19, "beat":0, "repeat":3, "interval":1}
+    {"type":"pattern", "name":"double_cube", "bar": 19, "beat":0, "repeat":3, "interval":1},
+
+    {"type":"event", "name":"end_chart", "bar":20, "beat":0}
   ]
 }

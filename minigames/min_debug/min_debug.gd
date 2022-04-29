@@ -29,9 +29,8 @@ func play_sfx(name):
 		"snd_shake": play_sound("shake", self)
 
 func on_fail():
-	print("ouchie mama")
 	play_sound("fail",self)
-	pass
+	emit_signal("miss",0.5)
 
 func on_good_input(input):
 	play_sound("hit",self)
@@ -39,11 +38,14 @@ func on_good_input(input):
 		cubes[0].die()
 		cubes.remove(0)
 
+func on_barely_input(input):
+	on_good_input(input)
+
 func on_missed_input(input):
 	on_fail()
-	cubes.remove(0)
+	if !cubes.empty(): cubes.remove(0)
 
-func on_blank_input():
+func on_blank_input(action_id):
 	print('blank input')
 
 func _on_new_beat(beat):

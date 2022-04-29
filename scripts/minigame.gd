@@ -2,19 +2,44 @@
 
 extends Node
 
+signal miss
+signal auto_ok
+signal auto_fail
+
 var conductor
 
 export var loaded_sfxs = {}
 var playing_sfxs = []
 
+var is_ready = false
+var input_enabled = false
+
 func _ready():
+	is_ready = true
+	input_enabled = true
 	_on_ready()
 
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		GameManager.load_previous_scene()
+
+# I'm using a "bridge" function in order to control inputs better
+func manage_input(input_name, input):
+	# Doesn't work if either inputs or game overall are disabled
+	if !input_enabled or !is_ready: return
+
+	match input_name:
+		"good": on_good_input(input)
+		"barely": on_barely_input(input)
+		"missed": on_missed_input(input)
+		"blank": on_blank_input(input)
+
 func _process(delta):
+	if !is_ready: return
 	_on_process(delta)
 	
-	#Handcrafted filter function since Godot doesn't implement it
-	#Remove the sfxs that aren't playing from the list
+	# Handcrafted filter function since Godot doesn't implement it
+	# Remove the sfxs that aren't playing from the list
 	var new_playing_sfxs = []
 	for ap in playing_sfxs:
 		if ap.playing:
@@ -57,9 +82,11 @@ func _on_ready(): pass
 func _on_process(delta):pass
 func play_event(event):pass
 func play_sfx(sfx_name):pass
+
 func on_missed_input(input):pass
-func on_blank_input():pass
+func on_blank_input(action_id):pass
 func on_good_input(input):pass
+func on_barely_input(input):pass
 
 func _on_new_beat(beat): pass
 func _on_new_bar(bar): pass

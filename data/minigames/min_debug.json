@@ -7,6 +7,12 @@
   "starting_minigame":"min_debug",
   "loaded_patterns":["min_debug"],
 
+  "music_path":"res://assets/music/misc/mus_practice_2.wav",
+  "loop": false,
+
+  "input_margin":0.1,
+  "input_barely_margin":0.03,
+
   "chart": [
 
     {"type":"pattern", "name":"single_cube", "bar": 0, "beat":0},

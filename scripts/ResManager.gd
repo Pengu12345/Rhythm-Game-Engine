@@ -8,6 +8,15 @@ var scenes_path = {}
 func _ready():
 	load_paths()
 
+func parse_JSON(path):
+	var file = File.new()
+	file.open(path, File.READ)
+	var content = file.get_as_text()
+	file.close()
+	
+	#Parse the content
+	var res = JSON.parse(content).get_result()
+	return res
 
 func get_scene_by_name(name):
 	if scenes_path.has(name):
@@ -16,14 +25,7 @@ func get_scene_by_name(name):
 		print("Error: Could not load scene with name " + name + ". Is the route correct?")
 	
 func load_paths():
-	var file = File.new()
-	file.open(routes_path, File.READ)
-	var content = file.get_as_text()
-	file.close()
-	
-	#Parse the content
-	var res = JSON.parse(content).get_result()
-	
+	var res = parse_JSON(routes_path)
 	for route in res["routes"]:
 		scenes_path[route["name"]] = route["path"]
 

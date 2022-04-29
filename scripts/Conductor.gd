@@ -118,6 +118,7 @@ func _on_music_player_finished():
 		emit_signal("looping")
 		$music_player.play()
 	else:
+		song_started = false
 		emit_signal("end_song")
 
 #GETTERS

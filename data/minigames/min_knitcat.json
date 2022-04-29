@@ -3,10 +3,11 @@
   "bpm":110,
   "time_signature":4,
 
-  "loop":true,
+  "loop":false,
   "music_path":"res://assets/music/knitcat/mus_knitcat_practice.wav",
 
-  "input_margin":0.05,
+  "input_margin":0.1,
+  "input_barely_margin":0.03,
   "audio_offset":0,
 
   "starting_minigame":"min_tripleclap",

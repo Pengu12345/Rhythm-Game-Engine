@@ -57,6 +57,9 @@ func on_good_input(input):
 		jumping = false
 
 func on_missed_input(input):
+	
+	emit_signal("miss")
+	
 	if jumping:
 		cats[0].play("angry")
 		cats[0].frame = 0
@@ -64,7 +67,14 @@ func on_missed_input(input):
 		cats[1].play("angry")
 		cats[1].frame = 0
 
-func on_blank_input():
+func on_barely_input(input):
+	emit_signal("miss",0.5)
+	on_good_input(input)
+
+func on_blank_input(action_id):
+	
+	emit_signal("miss")
+	
 	if !jumping:
 		cats[2].play("knit_fail")
 		cats[2].frame = 0
