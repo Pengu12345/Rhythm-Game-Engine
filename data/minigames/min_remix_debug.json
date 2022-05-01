@@ -15,6 +15,9 @@
   "loaded_patterns":["min_debug","min_tripleclap"],
 
   "chart": [
+
+    {"type":"event", "name":"set_volume", "bar":0, "beat":0, "value":-5},
+
     {"type":"pattern", "name":"single_cube", "bar": 0, "beat":0 , "repeat":7, "interval": 2},
 
     {"type":"event", "name":"load_minigame", "bar":3, "beat":1.7, "value":"min_tripleclap"},

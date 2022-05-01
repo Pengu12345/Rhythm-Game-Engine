@@ -152,3 +152,6 @@ func set_time_signature(new_ts):
 	time_signature = new_ts
 	
 func set_audio_offset(new_offset): audio_offset = new_offset
+
+func set_volume(value):
+	music_player.volume_db = value

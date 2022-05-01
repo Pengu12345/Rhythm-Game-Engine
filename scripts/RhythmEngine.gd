@@ -66,6 +66,15 @@ func _process(delta):
 						"set_bpm":
 							update_chart_bpm(conductor.get_bpm(), cue["value"], cue["position"])
 							conductor.set_bpm(cue["value"])
+						"set_volume": conductor.set_volume(cue["value"])
+						"fade_in":
+							if faded_out:
+								$BlackScreen/fader.play("fade_in",-1)
+								faded_out = false
+						"fade_out":
+							if !faded_out:
+								$BlackScreen/fader.play("fade_out",-1)
+								faded_out = true
 						"load_minigame": load_minigame(cue["value"])
 						"end_chart":
 							conductor.song_started = false

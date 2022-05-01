@@ -20,6 +20,7 @@
     {"type":"pattern", "name":"single_cube", "bar": 1, "beat":0},
     {"type":"pattern", "name":"double_cube", "bar": 1, "beat":1.5},
 
+    {"type":"event", "name":"fade_out","bar":2, "beat":0},
     {"type":"event", "name":"set_bpm","bar":2, "beat":0, "value":240},
 
     {"type":"pattern", "name":"single_cube", "bar": 2, "beat":0},
@@ -27,6 +28,7 @@
     {"type":"pattern", "name":"single_cube", "bar": 3, "beat":0},
     {"type":"pattern", "name":"double_cube", "bar": 3, "beat":1.5},
 
+    {"type":"event", "name":"fade_in","bar":4 , "beat":0},
     {"type":"event", "name":"set_bpm","bar":4, "beat":0, "value":60},
 
     {"type":"pattern", "name":"double_cube", "bar": 4, "beat":0},

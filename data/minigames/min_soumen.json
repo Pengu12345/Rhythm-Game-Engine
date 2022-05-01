@@ -1,0 +1,17 @@
+{
+  "name":"Rhythm Soumen",
+  "bpm":128,
+  "time_signature":4,
+
+  "minigames":["min_soumen"],
+  "starting_minigame":"min_soumen",
+  "loaded_patterns":["min_soumen"],
+
+  "music_path":"res://assets/music/soumen/mus_soumen_practice.wav",
+  "loop": false,
+
+  "input_margin":0.1,
+  "input_barely_margin":0.03,
+
+  "chart": []
+}

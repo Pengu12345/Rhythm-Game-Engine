@@ -1,7 +1,11 @@
 {
   "routes": [
     {"name":"min_debug","path":"res://minigames/min_debug/min_debug.tscn"},
+
     {"name":"min_bird","path":"res://minigames/min_bird/min_bird.tscn"},
-    {"name":"min_tripleclap","path":"res://minigames/min_tripleclap/min_tripleclap.tscn"}
+
+    {"name":"min_tripleclap","path":"res://minigames/min_tripleclap/min_tripleclap.tscn"},
+
+    {"name":"min_soumen","path":"res://minigames/min_soumen/min_soumen.tscn"}
   ]
 }
